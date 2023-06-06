@@ -26,12 +26,12 @@
         NOME:<BR>
         <input class="inp_1" id="nome_input"><bR><br>
         SABER MAIS SOBRE:<BR>
-        <select class="inp_1">
-            <option value="#"> opções... </option>
-            <option value="gr"> GINASTICA RITMICA </option>
-            <option value="ge"> GINASTICA ESTÉTICA </option>
-            <option value="ballet"> BALLET </option>
-            <option value="contemporaneo"> CONTEMPORÂNEO </option>
+        <select id="select_danca" class="inp_1">
+            <option value="110"> GINASTICA RITMICA </option>
+            <option value="111"> GINASTICA ESTÉTICA </option>
+            <option value="112"> BALLET </option>
+            <option value="113"> CONTEMPORÂNEO </option>
+            <option value="114"> ESPONTÂNEO </option>
         </select><bR><br>
 
     </div>
@@ -66,9 +66,10 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
         var repetirSenhaVar = confirmacao_senha_input.value;
+        var dancaVar = select_danca.value;
         
 
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || repetirSenhaVar == "") {
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || repetirSenhaVar == "" ) {
             // cardErro.style.display = "block"
             alert("Mensagem de erro para todos os campos em branco");
 
@@ -89,7 +90,8 @@
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 emailServer: emailVar,
-                senhaServer: senhaVar
+                senhaServer: senhaVar,
+                dancaServer: dancaVar
             })
         }).then(function (resposta) {
 

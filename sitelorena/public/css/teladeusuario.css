@@ -40,10 +40,10 @@ h1{
 }
 
 .myChart{
-    height: 500px;
-    width: 500px;
-    padding-left: 30px;
-    padding-top: 100px;
+    height: 700px;
+    width: 700px;
+    padding-left: 100px;
+    padding-top: 60px;
     color:rgb(255, 255, 255);
     
 }
@@ -60,13 +60,16 @@ h1{
 
 .div_analytics{
     align-items: center;
-    text-align: start;
-    padding-top: 30px;
+    text-align: center;
+    padding-top: 10px;
     padding-left: 30px;
     background-color: aqua;
-    height: 200px;
+    height: 100px;
     width: 600px;
-    border-radius: 50px;
-    border: 3px solid rgb(62, 11, 92);
-    margin-top: 110px;
+    border-radius: 20px;
+    margin-left: 40px;
+    color: black;
+    padding-top: 30px;
+    border: 1px solid rgb(62, 11, 92);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }

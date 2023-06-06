@@ -9,69 +9,99 @@
     <link rel="shortcut icon" href="./imagens/bailarinaaviao.png" type="image/x-icon">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="./imagens/bailainaespacate.png" width="100px" /> 
-        <a href="./index.html"><img src="./imagens/home.png" width="50px" /> </a>
-      </nav>
-      
-      <div class="tudo">
-      <div class="usuario_caixa">
-        <img class="imagens" src="./imagens/bailarinaplie.png" width="200px">
-        <h1>
-            SEJA BEM-VINDO!
-        </h1>
-        <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; padding-top: 10px;">
-            Aqui você poderá ver quais são as danças mais amadas<bR>
-                e escolhida pelas pessoas.<br>
+  <nav class="navbar">
+    <img src="./imagens/bailainaespacate.png" width="100px" /> 
+    <a href="./index.html"><img src="./imagens/home.png" width="50px" /> </a>
+  </nav>
+  
+  <div class="tudo">
+    <div class="usuario_caixa">
+      <img class="imagens" src="./imagens/bailarinaplie.png" width="200px">
+      <h1>
+        SEJA BEM-VINDO!
+      </h1>
+      <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; padding-top: 10px;">
+        Aqui você poderá ver quais são as danças mais amadas<bR>
+          e escolhida pelas pessoas.<br>
         </p>
         <img class="imagens" src="./imagens/bailarinaplie.png" width="200px" style="padding-top: 50px;">
       </div>
-
-
+      
+      
       <div class="myChart">
-      <div>
-        <canvas id="myChart"></canvas>
-      </div>
-      
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <div class="div_caixa">
-      <script>
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Ginastica Estética', 'Ginastica Ritmica', 'Ballet','Comtemporâneo', 'Espontâneo' ],
-            datasets: [{
-              label: 'DANÇAS MAIS ESCOLHIDAS',
-              data: [12, 50, 3, 5, 2, 3],
-              borderWidth: 1,  
-                borderColor: '#36A2EB',
-                backgroundColor: ['#9BD0F5', '#00FA9A','#98FB98','#00FFFF', '#AFEEEE ' ] 
-
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-        </script>
+        <div>
+          <div class="div_analytics">
+              Aqui você poderá ver quais as danças que mais estão em altas!<br>
+              Acompanhe as danças que estão se  inscrevendo mais e comece já<br>
+              a se interar nessas danças!!
+          </div>
+          <br><BR>
+          
+          <canvas id="myChart"></canvas>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <div class="div_caixa">
         </div>
 
       </div>
-    <div class="div_analytics">
-        <p>GINASTICA ESTÉTICA: <div id="div_mensagem1"></div></p>
-        <p>GINASTICA RITMICA:<div id="div_mensagem2"></div></p>
-        <p>BALLET:<div id="div_mensagem3"></div></p>
-        <p>CONTEMPORÂNEO: <div id="div_mensagem4"></div></p>
-        <p>ESPONTÂNEO: <div id="div_mensagem5"></div></p>
     </div>
-</div>
       
 </body>
 </html>
+<script>
+  var vt_danca = []
+
+  fetch(`medidas/obterDados`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function (resposta){
+    if(resposta.ok){
+      resposta.json().then((json) => {
+        console.log(json)
+        json.forEach(element => {
+          vt_danca.push(element.saberdanca)
+        });
+      }).then(()=>{
+        carregarGrafico1()
+      })
+    } else if(resposta.status == 404){
+      alert("deu b.o, erro 404!")
+    }
+  }).catch(function (resposta){
+    console.log(`ERRO: '${resposta}`);
+  });
+
+
+  function carregarGrafico1(){
+    var data = { 
+      labels: ['Ginastica Estética', 'Ginastica Ritmica', 'Ballet','Comtemporâneo', 'Espontâneo' ],
+      datasets: [{
+        data: [vt_danca[0],vt_danca[1],vt_danca[2],vt_danca[3],vt_danca[4]],
+        borderColor: '#36A2EB',
+        backgroundColor: ['#9BD0F5', '#00FA9A','#98FB98','#00FFFF', '#AFEEEE '] 
+      }]
+
+    };
+    new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    
+  }
+  
+
+    const ctx = document.getElementById('myChart');
+     
+  </script>
 
